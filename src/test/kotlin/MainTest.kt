@@ -145,4 +145,34 @@ class MainTest {
 
         assertFalse(doesPasswordPositionConform(password, policy))
     }
+
+    @Test
+    fun `doesPasswordPositionConform example 1-3 a abcde passes`() {
+        val input = "1-3 a: abcde"
+
+        val policy = PasswordPolicy.build(input)
+        val password = extractPassword(input)
+
+        assertTrue(doesPasswordPositionConform(password, policy))
+    }
+
+    @Test
+    fun `doesPasswordPositionConform example 1-3 b cdefg failes`() {
+        val input = "1-3 b: cdefg"
+
+        val policy = PasswordPolicy.build(input)
+        val password = extractPassword(input)
+
+        assertFalse(doesPasswordPositionConform(password, policy))
+    }
+
+    @Test
+    fun `doesPasswordPositionConform example 2-9 c ccccccccc failes`() {
+        val input = "1-3 b: cdefg"
+
+        val policy = PasswordPolicy.build(input)
+        val password = extractPassword(input)
+
+        assertFalse(doesPasswordPositionConform(password, policy))
+    }
 }
