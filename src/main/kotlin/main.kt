@@ -1,5 +1,15 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import java.io.File
+
+fun main() {
+    val inputs = File("src/main/resources/input.txt").readLines()
+
+    val validInputs = inputs.filter { input ->
+        val policy = PasswordPolicy.build(input)
+        val password = extractPassword(input)
+        doesPasswordConform(password, policy)
+    }
+
+    println("Number passing ${validInputs.size}")
 }
 
 fun doesPasswordConform(password: String, policy: PasswordPolicy): Boolean {
