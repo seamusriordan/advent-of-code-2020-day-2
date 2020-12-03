@@ -13,8 +13,14 @@ fun main() {
 }
 
 fun doesPasswordConform(password: String, policy: PasswordPolicy): Boolean {
-    val instances = password.toCharArray().filter { char -> char == policy.policyCharacter}.size
+    val instances = password.toCharArray().filter { char -> char == policy.policyCharacter }.size
     return instances >= policy.lowerBound && instances <= policy.upperBound
+}
+
+fun doesPasswordPositionConform(password: String, policy: PasswordPolicy): Boolean {
+    return password[policy.lowerBound - 1] != password[policy.upperBound - 1] &&
+            (password[policy.upperBound - 1] == policy.policyCharacter
+                    || password[policy.lowerBound - 1] == policy.policyCharacter)
 }
 
 fun extractPassword(input: String): String {

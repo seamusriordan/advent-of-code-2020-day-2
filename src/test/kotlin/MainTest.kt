@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -28,7 +30,7 @@ class MainTest {
             policyCharacter = 'a'
         }
 
-        assertEquals(true, doesPasswordConform("a", policy))
+        assertTrue(doesPasswordConform("a", policy))
     }
 
     @Test
@@ -39,7 +41,7 @@ class MainTest {
             policyCharacter = 'a'
         }
 
-        assertEquals(false, doesPasswordConform("a", policy))
+        assertFalse(doesPasswordConform("a", policy))
     }
 
     @Test
@@ -50,7 +52,7 @@ class MainTest {
             policyCharacter = 'a'
         }
 
-        assertEquals(false, doesPasswordConform("aaa", policy))
+        assertFalse(doesPasswordConform("aaa", policy))
     }
 
     @Test
@@ -71,7 +73,7 @@ class MainTest {
         val policy = PasswordPolicy.build(input)
         val password = extractPassword(input)
 
-        assertEquals(true, doesPasswordConform(password, policy))
+        assertTrue(doesPasswordConform(password, policy))
     }
 
     @Test
@@ -81,7 +83,7 @@ class MainTest {
         val policy = PasswordPolicy.build(input)
         val password = extractPassword(input)
 
-        assertEquals(false, doesPasswordConform(password, policy))
+        assertFalse(doesPasswordConform(password, policy))
     }
 
     @Test
@@ -91,6 +93,56 @@ class MainTest {
         val policy = PasswordPolicy.build(input)
         val password = extractPassword(input)
 
-        assertEquals(true, doesPasswordConform(password, policy))
+        assertTrue(doesPasswordConform(password, policy))
+    }
+
+    @Test
+    fun `doesPasswordPositionConform 1-2 a ab example passes`() {
+        val input = "1-2 a: ab"
+
+        val policy = PasswordPolicy.build(input)
+        val password = extractPassword(input)
+
+        assertTrue(doesPasswordPositionConform(password, policy))
+    }
+
+    @Test
+    fun `doesPasswordPositionConform 1-2 a bb example fails`() {
+        val input = "1-2 a: bb"
+
+        val policy = PasswordPolicy.build(input)
+        val password = extractPassword(input)
+
+        assertFalse(doesPasswordPositionConform(password, policy))
+    }
+
+    @Test
+    fun `doesPasswordPositionConform 1-2 a ba example passes`() {
+        val input = "1-2 a: ba"
+
+        val policy = PasswordPolicy.build(input)
+        val password = extractPassword(input)
+
+        assertTrue(doesPasswordPositionConform(password, policy))
+    }
+
+    @Test
+    fun `doesPasswordPositionConform 3-4 a ccba example passes`() {
+        val input = "3-4 a: ccba"
+
+        val policy = PasswordPolicy.build(input)
+        val password = extractPassword(input)
+
+        assertTrue(doesPasswordPositionConform(password, policy))
+    }
+
+    @Test
+    fun `doesPasswordPositionConform 3-4 a ccba example fails`() {
+        val input = "3-4 a: ccdb"
+
+        val policy = PasswordPolicy.build(input)
+        val password = extractPassword(input)
+
+        assertFalse(doesPasswordPositionConform(password, policy))
     }
 }
