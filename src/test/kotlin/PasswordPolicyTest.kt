@@ -1,14 +1,13 @@
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
-class MainTests {
+internal class PasswordPolicyTest {
     @Test
     internal fun `1-3 a abcde extracts policy with lower bound 1`() {
         val input = "1-3 a: abcde"
 
         val policy: PasswordPolicy = PasswordPolicy.build(input)
 
-        assertEquals(1, policy.lowerBound)
+        kotlin.test.assertEquals(1, policy.lowerBound)
     }
 
     @Test
@@ -17,7 +16,7 @@ class MainTests {
 
         val policy: PasswordPolicy = PasswordPolicy.build(input)
 
-        assertEquals(2, policy.lowerBound )
+        kotlin.test.assertEquals(2, policy.lowerBound)
     }
 
     @Test
@@ -26,7 +25,7 @@ class MainTests {
 
         val policy: PasswordPolicy = PasswordPolicy.build(input)
 
-        assertEquals(3, policy.upperBound)
+        kotlin.test.assertEquals(3, policy.upperBound)
     }
 
     @Test
@@ -35,7 +34,7 @@ class MainTests {
 
         val policy: PasswordPolicy = PasswordPolicy.build(input)
 
-        assertEquals(4, policy.upperBound)
+        kotlin.test.assertEquals(4, policy.upperBound)
     }
 
     @Test
@@ -44,7 +43,7 @@ class MainTests {
 
         val policy: PasswordPolicy = PasswordPolicy.build(input)
 
-        assertEquals('a', policy.policyCharacter)
+        kotlin.test.assertEquals('a', policy.policyCharacter)
     }
 
     @Test
@@ -53,25 +52,6 @@ class MainTests {
 
         val policy: PasswordPolicy = PasswordPolicy.build(input)
 
-        assertEquals('d', policy.policyCharacter)
-    }
-
-    @Test
-    internal fun `1-3 a abcde extracts password abcde`() {
-        val input = "1-3 a: abcde"
-
-        val password = extractPassword(input)
-
-        assertEquals("abcde", password)
-    }
-
-
-    @Test
-    internal fun `2-4 d abrdz extracts password abrdz`() {
-        val input = "2-4 d: abrdz"
-
-        val password = extractPassword(input)
-
-        assertEquals("abrdz", password)
+        kotlin.test.assertEquals('d', policy.policyCharacter)
     }
 }
